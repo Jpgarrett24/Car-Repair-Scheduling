@@ -38,6 +38,7 @@ namespace CarRepairScheduling.Models
         [DataType(DataType.Password)]
         [Display(Name = "Confirm Password: ")]
         public string Confirm { get; set; }
+        public List<Car> Cars { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;

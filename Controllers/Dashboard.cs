@@ -19,10 +19,10 @@ namespace CarRepairScheduling.Controllers
         public IActionResult Dashboard()
         {
             Wrapper Wrapper = new Wrapper();
-            User ActiveUser = _context.Users.FirstOrDefault(u => u.UserId == HttpContext.Session.GetInt32("CurrentUser"));
+            User ActiveUser = _context.Users.Include(u => u.Cars).ThenInclude(c => c.Services).FirstOrDefault(u => u.UserId == HttpContext.Session.GetInt32("CurrentUser"));
             if (ActiveUser == null)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "LoginReg");
             }
             Wrapper.User = ActiveUser;
             if (ActiveUser.Email.Contains("lubee.com"))
@@ -39,6 +39,27 @@ namespace CarRepairScheduling.Controllers
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "LoginReg");
+        }
+
+        [HttpPost("car/create")]
+        public IActionResult AddCar(Wrapper Form)
+        {
+            User ActiveUser = _context.Users.FirstOrDefault(u => u.UserId == HttpContext.Session.GetInt32("CurrentUser"));
+            if (ActiveUser == null)
+            {
+                return RedirectToAction("Index");
+            }
+            if (ModelState.IsValid)
+            {
+                Form.Car.UserId = ActiveUser.UserId;
+                _context.Cars.Add(Form.Car);
+                _context.SaveChanges();
+                return RedirectToAction("Dashboard");
+            }
+            else
+            {
+                return Dashboard();
+            }
         }
     }
 }

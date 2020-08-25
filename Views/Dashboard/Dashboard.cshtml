@@ -16,6 +16,29 @@
     <main>
         <section>
             <h3>Your cars:</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Make</th>
+                        <th>Model</th>
+                        <th>Mileage</th>
+                        <th>No. of Services</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Car car in Model.User.Cars)
+                    {
+                        <tr>
+                            <td>@car.Year</td>
+                            <td>@car.Make</td>
+                            <td>@car.Model</td>
+                            <td>@car.Mileage miles</td>
+                            <td>@car.Services.Count</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
             <form asp-action="AddCar" asp-controller="Dashboard" method="POST">
                 <span asp-validation-for="Car.Year"></span>
                 <select asp-for="Car.Year">
