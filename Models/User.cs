@@ -28,6 +28,7 @@ namespace CarRepairScheduling.Models
 
         [Required(ErrorMessage = "Password is required")]
         [MinLength(8, ErrorMessage = "Password must be a minimum of 8 characters")]
+        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$", ErrorMessage = "Password must contain: Uppercase Letter, Lowercase Letter, Number, and 1 special character")]
         [DataType(DataType.Password)]
         [Display(Name = "Password: ")]
         public string Password { get; set; }
