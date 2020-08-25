@@ -20,7 +20,7 @@ namespace CarRepairScheduling.Models
         public int Mileage { get; set; }
 
         [Required]
-        [Range(1800, 3000)]
+        [Range(1901, 3000)]
         public int Year { get; set; }
 
         public int UserId { get; set; }

@@ -41,7 +41,7 @@ namespace CarRepairScheduling.Controllers
                 User NewUser = _context.Users.FirstOrDefault(u => u.Email == Form.User.Email);
                 int UserId = NewUser.UserId;
                 HttpContext.Session.SetInt32("CurrentUser", UserId);
-                return RedirectToAction("Dashboard");
+                return RedirectToAction("Dashboard", "Dashboard");
             }
             else
             {
@@ -69,7 +69,7 @@ namespace CarRepairScheduling.Controllers
                 }
 
                 HttpContext.Session.SetInt32("CurrentUser", ReturningUser.UserId);
-                return RedirectToAction("Dashboard");
+                return RedirectToAction("Dashboard", "Dashboard");
             }
             else
             {

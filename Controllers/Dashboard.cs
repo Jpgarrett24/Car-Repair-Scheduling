@@ -25,7 +25,7 @@ namespace CarRepairScheduling.Controllers
                 return RedirectToAction("Index");
             }
             Wrapper.User = ActiveUser;
-            if (ActiveUser.UserId == 1)
+            if (ActiveUser.Email.Contains("lubee.com"))
             {
                 return View("AdminDashboard", Wrapper);
             }
@@ -33,6 +33,12 @@ namespace CarRepairScheduling.Controllers
             {
                 return View("Dashboard", Wrapper);
             }
+        }
+        [HttpGet("logout")]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "LoginReg");
         }
     }
 }
