@@ -14400,6 +14400,16 @@
       "FilePath": "/Users/josephgarrett/Desktop/coding_dojo/C#/CarRepairScheduling/Views/_ViewImports.cshtml",
       "TargetPath": "Views\\_ViewImports.cshtml",
       "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/josephgarrett/Desktop/coding_dojo/C#/CarRepairScheduling/Views/Dashboard/AdminDashboard.cshtml",
+      "TargetPath": "Views\\Dashboard\\AdminDashboard.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/josephgarrett/Desktop/coding_dojo/C#/CarRepairScheduling/Views/Dashboard/Dashboard.cshtml",
+      "TargetPath": "Views\\Dashboard\\Dashboard.cshtml",
+      "FileKind": "mvc"
     }
   ],
   "SerializationFormat": "0.2"
