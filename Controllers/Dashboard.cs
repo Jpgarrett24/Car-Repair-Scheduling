@@ -61,13 +61,35 @@ namespace CarRepairScheduling.Controllers
                 return Dashboard();
             }
         }
+        [HttpGet("service")]
+        public IActionResult Services()
+        {
+            Wrapper Wrapper = new Wrapper();
+            User ActiveUser = _context.Users.FirstOrDefault(u => u.UserId == HttpContext.Session.GetInt32("CurrentUser"));
+            if (ActiveUser == null)
+            {
+                return RedirectToAction("Index", "LoginReg");
+            }
+            Wrapper.User = ActiveUser;
+            Wrapper.AllServiceTypes = _context.ServiceTypes.Include(s => s.Services).OrderBy(s => s.Name).ToList();
+            return View("Services", Wrapper);
+        }
+        [HttpPost("service/delete/{id}")]
+        public IActionResult DeleteService(int id)
+        {
+            ServiceType ToDelete = _context.ServiceTypes.FirstOrDefault(s => s.ServiceTypeId == id);
+            _context.Remove(ToDelete);
+            _context.SaveChanges();
+            return RedirectToAction("Services");
+        }
+
         [HttpGet("service/new")]
         public IActionResult NewService()
         {
             User ActiveUser = _context.Users.FirstOrDefault(u => u.UserId == HttpContext.Session.GetInt32("CurrentUser"));
             if (ActiveUser == null)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "LoginReg");
             }
             return View("ServiceTypesForm");
         }
@@ -77,10 +99,30 @@ namespace CarRepairScheduling.Controllers
             if (ModelState.IsValid)
             {
                 ServiceType newServiceType = form.ServiceType;
-                _context.ServiceType.Add(newServiceType);
+                _context.ServiceTypes.Add(newServiceType);
                 _context.SaveChanges();
+                return RedirectToAction("Dashboard");
             }
-            return RedirectToAction("Dashboard");
+            else
+            {
+                return Services();
+            }
+        }
+
+        [HttpGet("car/{id}")]
+        public IActionResult CarDetails(int id)
+        {
+            Wrapper Wrapper = new Wrapper();
+            Wrapper.Car = _context.Cars.Include(c => c.Services).ThenInclude(s => s.ServiceType).FirstOrDefault(c => c.CarId == id);
+            User ActiveUser = _context.Users.Include(u => u.Cars).ThenInclude(c => c.Services).FirstOrDefault(u => u.UserId == HttpContext.Session.GetInt32("CurrentUser"));
+            if (ActiveUser == null)
+            {
+                return RedirectToAction("Index", "LoginReg");
+            }
+            Wrapper.User = ActiveUser;
+            Wrapper.AllServices = _context.Services.Include(s => s.ServiceType).Where(s => s.CarId == Wrapper.Car.CarId).ToList();
+
+            return View("CarDetails", Wrapper);
         }
     }
 }

@@ -5,12 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="~/js/UserDashboard.js"></script>
 </head>
 <body>
     <header>
         <h1>Welcome @Model.User.FirstName @Model.User.LastName</h1>
+        <a href="/dashboard">Home</a>
+        <a href="/service">Services</a>
+        <a href="/service/completed">Completed Services</a>
         <a href="/logout">Log Out</a>
     </header>
     <main>
@@ -32,7 +36,7 @@
                         <tr>
                             <td>@car.Year</td>
                             <td>@car.Make</td>
-                            <td>@car.Model</td>
+                            <td><a href="/car/@car.CarId">@car.Model</a></td>
                             <td>@car.Mileage miles</td>
                             <td>@car.Services.Count</td>
                         </tr>

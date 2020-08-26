@@ -1,0 +1,27 @@
+@model Wrapper
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Details</title>
+    <script>
+        {
+            "content-type":"application/json",
+            "authorization":"MTA2NzdkMmEtYjY5ZC00NTUwLWE3ZTQtMTA0MDBmYjdmZjQ2",
+            "partner-token":"a03e5affa4474e4b8e545e2afeb1014a"
+        }   
+    </script>
+</head>
+<body>
+    <header>
+        <a href="/dashboard">Home</a>
+        <a href="/service">Services</a>
+        <a href="/service/completed">Completed Services</a>
+        <a href="/logout">Log Out</a>
+    </header>
+    <main>
+        <h1>@Model.Car.Year @Model.Car.Make @Model.Car.Model</h1>
+    </main>
+</body>
+</html>

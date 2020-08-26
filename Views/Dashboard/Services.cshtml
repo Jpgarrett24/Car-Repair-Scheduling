@@ -1,0 +1,61 @@
+@model Wrapper
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+            <a href="/dashboard">Home</a>
+            <a href="/service/new">Services</a>
+            <a href="/service/completed">Completed Services</a>
+            <a href="/logout">Log Out</a>
+    </header>
+    <main>
+        <h1>Services:</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>Price</th>
+                    <th>Duration</th>
+                    <th>Times Completed</th>
+                    <th>Active</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ServiceType service in Model.AllServiceTypes)
+                {
+                    <tr>
+                        <td>@service.Name</td>
+                        <td>$@service.Price</td>
+                        <td>@service.Duration</td>
+                        <td>@service.Services.Count</td>
+                        <td>@service.Active</td>
+                        @if (Model.User.Email.Contains("lubee.com"))
+                        {
+                            <td>
+                                <form action='@($"/service/delete/{service.ServiceTypeId}")' method="POST">
+                                    <button>Delete</button>
+                                </form>
+                            </td>
+                        }
+                        else
+                        {
+                            <td><a href="/dashboard">Schedule</a></td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @if (Model.User.Email.Contains("lubee.com"))
+        {
+            <partial name="ServiceTypesForm" />
+        }
+    </main>
+</body>
+</html>
