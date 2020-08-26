@@ -1,5 +1,9 @@
 using System;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -121,7 +125,8 @@ namespace CarRepairScheduling.Controllers
             }
             Wrapper.User = ActiveUser;
             Wrapper.AllServices = _context.Services.Include(s => s.ServiceType).Where(s => s.CarId == Wrapper.Car.CarId).ToList();
-
+            string url = $"https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/{Wrapper.Car.VIN}?format=json&modelyear={Wrapper.Car.Year}";
+            Wrapper.CarDetails = url;
             return View("CarDetails", Wrapper);
         }
     }

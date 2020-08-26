@@ -22,11 +22,14 @@ namespace CarRepairScheduling.Models
         [Range(0, 2000000000, ErrorMessage = "Must be a positive number")]
         public int Mileage { get; set; }
 
-
         [Required(ErrorMessage = "Year is required")]
         [Display(Name = "Year: ")]
         [Range(1901, 3000)]
         public int Year { get; set; }
+
+        [Required(ErrorMessage = "VIN is required")]
+        [Display(Name = "Vehicle VIN")]
+        public string VIN { get; set; }
 
         public int UserId { get; set; }
         public User Owner { get; set; }
