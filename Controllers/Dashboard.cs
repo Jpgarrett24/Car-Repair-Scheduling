@@ -61,5 +61,26 @@ namespace CarRepairScheduling.Controllers
                 return Dashboard();
             }
         }
+        [HttpGet("service/new")]
+        public IActionResult NewService()
+        {
+            User ActiveUser = _context.Users.FirstOrDefault(u => u.UserId == HttpContext.Session.GetInt32("CurrentUser"));
+            if (ActiveUser == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View("ServiceTypesForm");
+        }
+        [HttpPost("service/new")]
+        public IActionResult CreateServiceType(Wrapper form)
+        {
+            if (ModelState.IsValid)
+            {
+                ServiceType newServiceType = form.ServiceType;
+                _context.ServiceType.Add(newServiceType);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Dashboard");
+        }
     }
 }

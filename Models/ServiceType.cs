@@ -9,13 +9,16 @@ namespace CarRepairScheduling.Models
         [Key]
         public int ServiceTypeId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Service name is required")]
+        [Display(Name = "Service Name: ")]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Service Price is required")]
+        [Display(Name = "Service Price: ")]
         public int Price { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Service duration is required")]
+        [Display(Name = "Service duration: ")]
         [DataType(DataType.Duration)]
         public TimeSpan Duration { get; set; }
 
