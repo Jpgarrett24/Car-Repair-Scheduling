@@ -14392,12 +14392,30 @@
   "RootNamespace": "CarRepairScheduling",
   "Documents": [
     {
+<<<<<<< HEAD
       "FilePath": "d:\\Documents\\Programing_Classes\\Coding_Dojo\\C#\\Deployment\\C# Project\\Car-Repair-Scheduling\\Views\\LoginReg\\Index.cshtml",
+=======
+      "FilePath": "/Users/josephgarrett/Desktop/coding_dojo/C#/CarRepairScheduling/Views/Dashboard/ServiceTypesForm.cshtml",
+      "TargetPath": "Views\\Dashboard\\ServiceTypesForm.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/josephgarrett/Desktop/coding_dojo/C#/CarRepairScheduling/Views/LoginReg/Index.cshtml",
+>>>>>>> 14f315e2c90b31ea9e419c39a22fd97f159594fb
       "TargetPath": "Views\\LoginReg\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
+<<<<<<< HEAD
       "FilePath": "d:\\Documents\\Programing_Classes\\Coding_Dojo\\C#\\Deployment\\C# Project\\Car-Repair-Scheduling\\Views\\_ViewImports.cshtml",
+=======
+      "FilePath": "/Users/josephgarrett/Desktop/coding_dojo/C#/CarRepairScheduling/Views/Dashboard/CarDetails.cshtml",
+      "TargetPath": "Views\\Dashboard\\CarDetails.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/josephgarrett/Desktop/coding_dojo/C#/CarRepairScheduling/Views/_ViewImports.cshtml",
+>>>>>>> 14f315e2c90b31ea9e419c39a22fd97f159594fb
       "TargetPath": "Views\\_ViewImports.cshtml",
       "FileKind": "mvc"
     },
@@ -14412,6 +14430,7 @@
       "FileKind": "mvc"
     },
     {
+<<<<<<< HEAD
       "FilePath": "d:\\Documents\\Programing_Classes\\Coding_Dojo\\C#\\Deployment\\C# Project\\Car-Repair-Scheduling\\Views\\Dashboard\\NewService.cshtml",
       "TargetPath": "Views\\Dashboard\\NewService.cshtml",
       "FileKind": "mvc"
@@ -14419,6 +14438,15 @@
     {
       "FilePath": "d:\\Documents\\Programing_Classes\\Coding_Dojo\\C#\\Deployment\\C# Project\\Car-Repair-Scheduling\\Views\\Dashboard\\ServiceTypesForm.cshtml",
       "TargetPath": "Views\\Dashboard\\ServiceTypesForm.cshtml",
+=======
+      "FilePath": "/Users/josephgarrett/Desktop/coding_dojo/C#/CarRepairScheduling/Views/Dashboard/Services.cshtml",
+      "TargetPath": "Views\\Dashboard\\Services.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/josephgarrett/Desktop/coding_dojo/C#/CarRepairScheduling/Views/Dashboard/Dashboard.cshtml",
+      "TargetPath": "Views\\Dashboard\\Dashboard.cshtml",
+>>>>>>> 14f315e2c90b31ea9e419c39a22fd97f159594fb
       "FileKind": "mvc"
     }
   ],

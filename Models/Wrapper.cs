@@ -13,5 +13,6 @@ namespace CarRepairScheduling.Models
         public List<ServiceType> AllServiceTypes { get; set; }
         public Service Service { get; set; }
         public List<Service> AllServices { get; set; }
+        public object CarDetails { get; set; }
     }
 }

@@ -1,5 +1,9 @@
 using System;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -62,7 +66,37 @@ namespace CarRepairScheduling.Controllers
                 return Dashboard();
             }
         }
-        [HttpGet("serviceType/new")]
+
+        [HttpPost("cars/delete/{id}")]
+        public IActionResult DeleteCar(int id)
+        {
+            Car ToDelete = _context.Cars.FirstOrDefault(c => c.CarId == id);
+            _context.Remove(ToDelete);
+            _context.SaveChanges();
+            return RedirectToAction("Dashboard");
+        }
+
+        [HttpGet("service")]
+        public IActionResult Services()
+        {
+            Wrapper Wrapper = new Wrapper();
+            User ActiveUser = _context.Users.FirstOrDefault(u => u.UserId == HttpContext.Session.GetInt32("CurrentUser"));
+            if (ActiveUser == null)
+            {
+                return RedirectToAction("Index", "LoginReg");
+            }
+            Wrapper.User = ActiveUser;
+            Wrapper.AllServiceTypes = _context.ServiceTypes.Include(s => s.Services).OrderBy(s => s.Name).ToList();
+            return View("Services", Wrapper);
+        }
+        [HttpPost("service/delete/{id}")]
+        public IActionResult DeleteService(int id)
+        {
+            ServiceType ToDelete = _context.ServiceTypes.FirstOrDefault(s => s.ServiceTypeId == id);
+            _context.Remove(ToDelete);
+            _context.SaveChanges();
+            return RedirectToAction("Services");
+        }
         public IActionResult NewServiceType()
         {
             User ActiveUser = _context.Users.FirstOrDefault(u => u.UserId == HttpContext.Session.GetInt32("CurrentUser"));
@@ -72,6 +106,7 @@ namespace CarRepairScheduling.Controllers
             }
             return View("ServiceTypesForm");
         }
+
         [HttpPost("serviceType/new")]
         public IActionResult CreateServiceType(Wrapper form)
         {
@@ -85,8 +120,29 @@ namespace CarRepairScheduling.Controllers
                 ServiceType newServiceType = form.ServiceType;
                 _context.ServiceTypes.Add(newServiceType);
                 _context.SaveChanges();
+                return RedirectToAction("Dashboard");
             }
-            return RedirectToAction("Dashboard");
+            else
+            {
+                return Services();
+            }
+        }
+
+        [HttpGet("car/{id}")]
+        public IActionResult CarDetails(int id)
+        {
+            Wrapper Wrapper = new Wrapper();
+            Wrapper.Car = _context.Cars.Include(c => c.Services).ThenInclude(s => s.ServiceType).FirstOrDefault(c => c.CarId == id);
+            User ActiveUser = _context.Users.Include(u => u.Cars).ThenInclude(c => c.Services).FirstOrDefault(u => u.UserId == HttpContext.Session.GetInt32("CurrentUser"));
+            if (ActiveUser == null)
+            {
+                return RedirectToAction("Index", "LoginReg");
+            }
+            Wrapper.User = ActiveUser;
+            Wrapper.AllServices = _context.Services.Include(s => s.ServiceType).Where(s => s.CarId == Wrapper.Car.CarId).ToList();
+            string url = $"https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/{Wrapper.Car.VIN}?format=json&modelyear={Wrapper.Car.Year}";
+            Wrapper.CarDetails = url;
+            return View("CarDetails", Wrapper);
         }
         [HttpGet("service/new")]
         public IActionResult NewService()

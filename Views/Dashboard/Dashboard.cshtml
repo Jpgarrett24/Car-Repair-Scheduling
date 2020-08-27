@@ -5,25 +5,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="~/js/UserDashboard.js"></script>
 </head>
 <body>
     <header>
         <h1>Welcome @Model.User.FirstName @Model.User.LastName</h1>
-        <a href="/logout">Log Out</a>
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link active" href="/dashboard">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/service">Services</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/service/completed">Completed Services</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Log Out</a>
+            </li>
+        </ul>
     </header>
     <main>
         <section>
-            <h3>Your cars:</h3>
-            <table>
+            <h3>Your Vehicles:</h3>
+            <table class="table">
                 <thead>
                     <tr>
-                        <th>Year</th>
-                        <th>Make</th>
-                        <th>Model</th>
-                        <th>Mileage</th>
-                        <th>No. of Services</th>
+                        <th scope="col">Year</th>
+                        <th scope="col">Make</th>
+                        <th scope="col">Model</th>
+                        <th scope="col">Mileage</th>
+                        <th scope="col">No. of Services</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,9 +47,14 @@
                         <tr>
                             <td>@car.Year</td>
                             <td>@car.Make</td>
-                            <td>@car.Model</td>
+                            <td><a href="/car/@car.CarId">@car.Model</a></td>
                             <td>@car.Mileage miles</td>
                             <td>@car.Services.Count</td>
+                            <td>
+                                <form action="/cars/delete/@car.CarId" method="POST">
+                                    <button>Delete</button>
+                                </form>
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -164,19 +184,26 @@
                     <option value="1903">1903</option>
                     <option value="1902">1902</option>
                     <option value="1901">1901</option>
-                    </select>
                 </select>
+                <br>
                 <span asp-validation-for="Car.Make"></span>
                 <select asp-for="Car.Make" id="formmake">
                     <option value="" selected disabled>Make</option>
                 </select>
+                <br>
                 <span asp-validation-for="Car.Model"></span>
                 <select asp-for="Car.Model" id="formmodel">
                     <option value="" selected disabled>Model</option>
                 </select>
+                <br>
                 <span asp-validation-for="Car.Mileage"></span>
                 <label asp-for="Car.Mileage"></label>
                 <input asp-for="Car.Mileage">
+                <br>
+                <span asp-validation-for="Car.VIN"></span>
+                <label asp-for="Car.VIN"></label>
+                <input asp-for="Car.VIN">
+                <br>
                 <button>Add Car</button>
             </form>
         </section>
