@@ -86,7 +86,16 @@ namespace CarRepairScheduling.Controllers
                 return RedirectToAction("Index", "LoginReg");
             }
             Wrapper.User = ActiveUser;
-            Wrapper.AllServiceTypes = _context.ServiceTypes.Include(s => s.Services).OrderBy(s => s.Name).ToList();
+            Wrapper.AllUsers = _context.Users
+                .Include(u => u.Cars)
+                .ThenInclude(c => c.Services)
+                .ThenInclude(s => s.ServiceType)
+                .OrderBy(u => u.LastName)
+                .ToList();
+            Wrapper.AllCars = _context.Cars
+                .Include(c => c.Owner)
+                .ToList();
+            Wrapper.AllServiceTypes = _context.ServiceTypes.Include(s => s.Services).Where(s => s.Active == true).OrderBy(s => s.Name).ToList();
             return View("Services", Wrapper);
         }
         [HttpPost("service/delete/{id}")]

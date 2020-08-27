@@ -7,25 +7,16 @@
     <title>New Service</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        body{
+            padding: 1% 5%;
+        }
+    </style>
 </head>
-<script>
-    jQuery(document).ready(function ($) {
-        $('#ThisUser').change(function(){
-            let personId = $(this).val();
-            $.get(`/user/cars/${personId}`, response => {
-                console.log(response);
-                for(car of response){
-                    
-                    console.log(car)
-                    console.log(car.make)
-                    $("#CarDropDown").append(`<option value="${car.carId}">${car.year} ${car.make} ${car.model}</option>`)
-                }
-            })
-        })
-    });
-</script>
+<script src="~/js/NewService.js"></script>
 <body>
     <div class="container">
+        <h3>Schedule a Service</h3>
         <div class="form-group row">
             <label class="col-sm-4">Owner</label>
             <select class="col-sm-8 form-control" id="ThisUser">

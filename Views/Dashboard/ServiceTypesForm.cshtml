@@ -6,10 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add a Service Type</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+        body{
+            padding: 1% 5%;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <form asp-action="CreateServiceType" asp-controller="Dashboard" method="post" class="col-sm-6">
+        <form asp-action="CreateServiceType" asp-controller="Dashboard" method="post">
             <h3>Add a new service:</h3>
             <div class="form-group row">
                 <span class="col-sm-8 offset-sm-4 text-danger" asp-validation-for="ServiceType.Name"></span>

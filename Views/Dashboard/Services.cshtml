@@ -6,25 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+        body{
+            padding: 1% 5%;
+        }
+    </style>
 </head>
 <body>
     <header>
-            <a href="/dashboard">Home</a>
-            <a href="/service/new">Services</a>
-            <a href="/service/completed">Completed Services</a>
-            <a href="/logout">Log Out</a>
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboard">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/service">Services</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/service/completed">Completed Services</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Log Out</a>
+            </li>
+        </ul>
     </header>
     <main>
-        <h1>Services:</h1>
-        <table>
+        <div class="row">
+            <div class="col-sm-6">
+                <partial name="NewService" />
+            </div>
+            @if (Model.User.Email.Contains("lubee.com"))
+            {
+                <div class="col-sm-6">
+                    <partial name="ServiceTypesForm" />
+                </div>
+            }
+        </div>
+        <h1 class="text-center">All Services:</h1>
+        <table class="table">
             <thead>
                 <tr>
-                    <th>Service</th>
-                    <th>Price</th>
-                    <th>Duration</th>
-                    <th>Times Completed</th>
-                    <th>Active</th>
-                    <th>Action</th>
+                    <th scope="col">Service</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Times Completed</th>
+                    <th scope="col">Active</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,16 +72,12 @@
                         }
                         else
                         {
-                            <td><a href="/dashboard">Schedule</a></td>
+                            <td><a href="/service/new/@service.ServiceTypeId">Schedule</a></td>
                         }
                     </tr>
                 }
             </tbody>
         </table>
-        @if (Model.User.Email.Contains("lubee.com"))
-        {
-            <partial name="ServiceTypesForm" />
-        }
     </main>
 </body>
 </html>
