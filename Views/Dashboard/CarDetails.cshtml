@@ -42,6 +42,19 @@
             success: function(res) {
                 console.log(res);
                 results = res.Results;
+                if ("@Model.Car.Model" != "Motorcycle"){
+                    $(".data").append(`
+                <p><strong>${res.Results[14].Variable}:</strong> ${res.Results[14].Value}</p>
+                <p><strong>Vehicle Class:</strong> ${res.Results[23].Value}</p>
+                <p><strong>Vehicle Weight:</strong> ${res.Results[28].Value}</p>
+                <p><strong>${res.Results[24].Variable}:</strong> ${res.Results[24].Value}</p>
+                <p><strong>${res.Results[70].Variable}:</strong> ${res.Results[70].Value}</p>
+                <p><strong>${res.Results[71].Variable}:</strong> ${res.Results[71].Value}</p>
+                <p><strong>Horesepower:</strong> ${res.Results[82].Value}</p>
+                <p><strong>Mileage:</strong> @Model.Car.Mileage</p>
+                `)
+                }
+                else{
                 $(".data").append(`
                 <p><strong>${res.Results[14].Variable}:</strong> ${res.Results[14].Value}</p>
                 <p><strong>Vehicle Class:</strong> ${res.Results[23].Value}</p>
@@ -49,10 +62,9 @@
                 <p><strong>${res.Results[70].Variable}:</strong> ${res.Results[70].Value}</p>
                 <p><strong>${res.Results[71].Variable}:</strong> ${res.Results[71].Value}</p>
                 <p><strong>Horesepower:</strong> ${res.Results[82].Value}</p>
-                <p><strong>${res.Results[98].Variable}:</strong> ${res.Results[98].Value}</p>
-                <p><strong>${res.Results[99].Variable}:</strong> ${res.Results[99].Value}</p>
                 <p><strong>Mileage:</strong> @Model.Car.Mileage</p>
                 `)
+                }
             }
         });
     </script>

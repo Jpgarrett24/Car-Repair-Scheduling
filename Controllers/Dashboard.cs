@@ -65,6 +65,16 @@ namespace CarRepairScheduling.Controllers
                 return Dashboard();
             }
         }
+
+        [HttpPost("cars/delete/{id}")]
+        public IActionResult DeleteCar(int id)
+        {
+            Car ToDelete = _context.Cars.FirstOrDefault(c => c.CarId == id);
+            _context.Remove(ToDelete);
+            _context.SaveChanges();
+            return RedirectToAction("Dashboard");
+        }
+
         [HttpGet("service")]
         public IActionResult Services()
         {
