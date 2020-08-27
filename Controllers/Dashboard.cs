@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using CarRepairScheduling.Models;
+using System.Collections.Generic;
 
 namespace CarRepairScheduling.Controllers
 {
@@ -47,7 +48,7 @@ namespace CarRepairScheduling.Controllers
             User ActiveUser = _context.Users.FirstOrDefault(u => u.UserId == HttpContext.Session.GetInt32("CurrentUser"));
             if (ActiveUser == null)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "LoginReg");
             }
             if (ModelState.IsValid)
             {
@@ -61,26 +62,91 @@ namespace CarRepairScheduling.Controllers
                 return Dashboard();
             }
         }
+        [HttpGet("serviceType/new")]
+        public IActionResult NewServiceType()
+        {
+            User ActiveUser = _context.Users.FirstOrDefault(u => u.UserId == HttpContext.Session.GetInt32("CurrentUser"));
+            if (ActiveUser == null)
+            {
+                return RedirectToAction("Index", "LoginReg");
+            }
+            return View("ServiceTypesForm");
+        }
+        [HttpPost("serviceType/new")]
+        public IActionResult CreateServiceType(Wrapper form)
+        {
+            User ActiveUser = _context.Users.FirstOrDefault(u => u.UserId == HttpContext.Session.GetInt32("CurrentUser"));
+            if (ActiveUser == null)
+            {
+                return RedirectToAction("Index", "LoginReg");
+            }
+            if (ModelState.IsValid)
+            {
+                ServiceType newServiceType = form.ServiceType;
+                _context.ServiceTypes.Add(newServiceType);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Dashboard");
+        }
         [HttpGet("service/new")]
         public IActionResult NewService()
         {
             User ActiveUser = _context.Users.FirstOrDefault(u => u.UserId == HttpContext.Session.GetInt32("CurrentUser"));
             if (ActiveUser == null)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "LoginReg");
             }
-            return View("ServiceTypesForm");
+            Wrapper NewService = new Wrapper();
+            NewService.User = ActiveUser;
+            NewService.AllServiceTypes = _context.ServiceTypes
+                .Where(u => u.Active == true)
+                .ToList();
+            NewService.AllUsers = _context.Users
+                .Include(u => u.Cars)
+                .ThenInclude(c => c.Services)
+                .ThenInclude(s => s.ServiceType)
+                .ToList();
+            NewService.AllCars = _context.Cars
+                .Include(c => c.Owner)
+                .ToList();
+            return View("NewService", NewService);
         }
         [HttpPost("service/new")]
-        public IActionResult CreateServiceType(Wrapper form)
+        public IActionResult CreateService(Wrapper form)
         {
+            User ActiveUser = _context.Users.FirstOrDefault(u => u.UserId == HttpContext.Session.GetInt32("CurrentUser"));
+            if (ActiveUser == null)
+            {
+                return RedirectToAction("Index", "LoginReg");
+            }
             if (ModelState.IsValid)
             {
-                ServiceType newServiceType = form.ServiceType;
-                _context.ServiceType.Add(newServiceType);
+                Service ThisNewService = form.Service;
+                ServiceType SelectedServiceType = _context.ServiceTypes
+                    .FirstOrDefault(st => st.ServiceTypeId == form.Service.ServiceTypeId);
+                ThisNewService.Price = SelectedServiceType.Price;
+                ThisNewService.Duration = SelectedServiceType.Duration;
+                _context.Services.Add(ThisNewService);
                 _context.SaveChanges();
+                return RedirectToAction("NewService");
             }
-            return RedirectToAction("Dashboard");
+            return View("NewService");
+        }
+
+        [HttpGet("/user/cars/{id}")]
+        public JsonResult ThisUsersCars(int id)
+        {
+            var TheseCars = _context.Cars
+                .Include(c => c.Owner)
+                .Where(c => c.UserId == id)
+                .Select(a => new
+                {
+                    CarId = a.CarId,
+                    Make = a.Make,
+                    Model = a.Model,
+                    Year = a.Year
+                });
+            return Json(TheseCars);
         }
     }
 }

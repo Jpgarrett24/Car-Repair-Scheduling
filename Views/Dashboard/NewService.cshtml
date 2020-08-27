@@ -1,0 +1,66 @@
+@model CarRepairScheduling.Models.Wrapper
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Service</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<script>
+    jQuery(document).ready(function ($) {
+        $('#ThisUser').change(function(){
+            let personId = $(this).val();
+            $.get(`/user/cars/${personId}`, response => {
+                console.log(response);
+                for(car of response){
+                    
+                    console.log(car)
+                    console.log(car.make)
+                    $("#CarDropDown").append(`<option value="${car.carId}">${car.year} ${car.make} ${car.model}</option>`)
+                }
+            })
+        })
+    });
+</script>
+<body>
+    <div class="container">
+        <div class="form-group row">
+            <label class="col-sm-4">Owner</label>
+            <select class="col-sm-8 form-control" id="ThisUser">
+                <option value=""></option>
+                @foreach (var person in Model.AllUsers)
+                {
+                    <option value="@person.UserId">@person.LastName, @person.FirstName</option>
+                }
+            </select>
+        </div>
+        <form asp-action="CreateService" asp-controller="Dashboard" method="post">
+            <div class="form-group row">
+                <span class="col-sm-8 offset-sm-4 text-danger" asp-validation-for="Service.CarId"></span>
+                <label class="col-sm-4">Car</label>
+                <select asp-for="Service.CarId" class="col-sm-8 form-control" id="CarDropDown">
+                </select>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4">Service Type</label>
+                <select asp-for="Service.ServiceTypeId" class="col-sm-8 form-control">
+                    @foreach (var item in Model.AllServiceTypes)
+                    {
+                        <option value="@item.ServiceTypeId">@item.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group row">
+                <span class="col-sm-8 offset-sm-4 text-danger" asp-validation-for="Service.Start"></span>
+                <label asp-for="Service.Start" class="col-sm-4"></label>
+                <input asp-for="Service.Start" class="col-sm-8 form-control">
+                </div>
+            <div class="form-group row">
+                <input type="submit" value="Create" class="col-sm-4 offset-sm-4 btn btn-primary">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
