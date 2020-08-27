@@ -12,23 +12,33 @@
 <body>
     <header>
         <h1>Welcome @Model.User.FirstName @Model.User.LastName</h1>
-        <a href="/dashboard">Home</a>
-        <a href="/service">Services</a>
-        <a href="/service/completed">Completed Services</a>
-        <a href="/logout">Log Out</a>
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link active" href="/dashboard">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/service">Services</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/service/completed">Completed Services</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Log Out</a>
+            </li>
+        </ul>
     </header>
     <main>
         <section>
             <h3>Your cars:</h3>
-            <table>
+            <table class="table">
                 <thead>
                     <tr>
-                        <th>Year</th>
-                        <th>Make</th>
-                        <th>Model</th>
-                        <th>Mileage</th>
-                        <th>No. of Services</th>
-                        <th>Action</th>
+                        <th scope="col">Year</th>
+                        <th scope="col">Make</th>
+                        <th scope="col">Model</th>
+                        <th scope="col">Mileage</th>
+                        <th scope="col">No. of Services</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
