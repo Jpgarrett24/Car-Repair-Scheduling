@@ -21,9 +21,19 @@
             <label class="col-sm-4">Owner</label>
             <select class="col-sm-8 form-control" id="ThisUser">
                 <option value=""></option>
-                @foreach (var person in Model.AllUsers)
+                @if (Model.User.Email.Contains("lubee.com"))
+                    {
+                    @foreach (User person in Model.AllUsers)
+                    {
+                        if (!person.Email.Contains("lubee.com"))
+                        {
+                            <option value="@person.UserId">@person.LastName, @person.FirstName</option>
+                        }
+                    }
+                }
+                else
                 {
-                    <option value="@person.UserId">@person.LastName, @person.FirstName</option>
+                    <option value="@Model.User.UserId">@Model.User.FirstName @Model.User.LastName</option>
                 }
             </select>
         </div>
