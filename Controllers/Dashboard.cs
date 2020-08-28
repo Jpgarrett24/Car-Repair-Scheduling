@@ -30,6 +30,9 @@ namespace CarRepairScheduling.Controllers
                 return RedirectToAction("Index", "LoginReg");
             }
             Wrapper.User = ActiveUser;
+            Wrapper.AllUsers = _context.Users
+                .Include(u => u.Cars)
+                .ToList();
             if (ActiveUser.Email.Contains("lubee.com"))
             {
                 return View("AdminDashboard", Wrapper);
@@ -193,7 +196,7 @@ namespace CarRepairScheduling.Controllers
                 ThisNewService.Duration = SelectedServiceType.Duration;
                 _context.Services.Add(ThisNewService);
                 _context.SaveChanges();
-                return RedirectToAction("NewService");
+                return RedirectToAction("Services");
             }
             return View("NewService");
         }

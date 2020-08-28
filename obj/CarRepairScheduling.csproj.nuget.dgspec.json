@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/josephgarrett/Desktop/coding_dojo/C#/CarRepairScheduling/CarRepairScheduling.csproj": {}
+    "D:\\Documents\\Programing_Classes\\Coding_Dojo\\C#\\Deployment\\C# Project\\Car-Repair-Scheduling\\CarRepairScheduling.csproj": {}
   },
   "projects": {
-    "/Users/josephgarrett/Desktop/coding_dojo/C#/CarRepairScheduling/CarRepairScheduling.csproj": {
+    "D:\\Documents\\Programing_Classes\\Coding_Dojo\\C#\\Deployment\\C# Project\\Car-Repair-Scheduling\\CarRepairScheduling.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/josephgarrett/Desktop/coding_dojo/C#/CarRepairScheduling/CarRepairScheduling.csproj",
+        "projectUniqueName": "D:\\Documents\\Programing_Classes\\Coding_Dojo\\C#\\Deployment\\C# Project\\Car-Repair-Scheduling\\CarRepairScheduling.csproj",
         "projectName": "CarRepairScheduling",
-        "projectPath": "/Users/josephgarrett/Desktop/coding_dojo/C#/CarRepairScheduling/CarRepairScheduling.csproj",
-        "packagesPath": "/Users/josephgarrett/.nuget/packages/",
-        "outputPath": "/Users/josephgarrett/Desktop/coding_dojo/C#/CarRepairScheduling/obj/",
+        "projectPath": "D:\\Documents\\Programing_Classes\\Coding_Dojo\\C#\\Deployment\\C# Project\\Car-Repair-Scheduling\\CarRepairScheduling.csproj",
+        "packagesPath": "C:\\Users\\Bmich\\.nuget\\packages\\",
+        "outputPath": "D:\\Documents\\Programing_Classes\\Coding_Dojo\\C#\\Deployment\\C# Project\\Car-Repair-Scheduling\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/josephgarrett/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Bmich\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -65,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.302/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

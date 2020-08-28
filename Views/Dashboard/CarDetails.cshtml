@@ -109,6 +109,27 @@ $.ajax({
     <main>
         <div class="container">
         <h1>@Model.Car.Year @Model.Car.Make @Model.Car.Model</h1>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Service</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Completed</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var service in Model.AllServices)
+                {
+                    <tr>
+                        <td>@service.ServiceType.Name</td>
+                        <td>@service.ServiceType.Price</td>
+                        <td>@service.ServiceType.Duration</td>
+                        <td>@service.Start</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
         <section class="data">
             <h4>Vehicle Details:</h4>
         </section>

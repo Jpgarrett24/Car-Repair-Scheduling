@@ -15,14 +15,44 @@
 <body>
     <header>
         <nav>
-            <a href="/dashboard">Home</a>
-            <a href="/service">Services</a>
-            <a href="/service/completed">Completed Services</a>
-            <a href="/logout">Log Out</a>
+            <ul class="nav nav-pills nav-fill">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/dashboard">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/service">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/service/completed">Completed Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Log Out</a>
+                </li>
+            </ul>
         </nav>
     </header>
     <main>
-
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Number of Cars</th>
+                    <th scope="col">Member Since</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model.AllUsers)
+                {
+                    <tr>
+                        <td>@user.LastName @user.FirstName</td>
+                        <td>@user.Email</td>
+                        <td>@user.Cars.Count</td>
+                        <td>@user.CreatedAt</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </main>
 </body>
 </html>
