@@ -239,5 +239,19 @@ namespace CarRepairScheduling.Controllers
             _context.SaveChanges();
             return RedirectToAction("Services");
         }
+
+        [HttpGet("/service/completed")]
+        public IActionResult CompletedServices()
+        {
+            Wrapper Wrapper = new Wrapper();
+            User ActiveUser = _context.Users.FirstOrDefault(u => u.UserId == HttpContext.Session.GetInt32("CurrentUser"));
+            if (ActiveUser == null)
+            {
+                return RedirectToAction("Index", "LoginReg");
+            }
+            Wrapper.User = ActiveUser;
+            Wrapper.AllServices = _context.Services.Include(s => s.ServiceType).Include(s => s.ServicedCar).ThenInclude(c => c.Owner).Where(s => s.Start < DateTime.Now).ToList();
+            return View("CompletedServices", Wrapper);
+        }
     }
 }
