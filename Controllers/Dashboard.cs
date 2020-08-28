@@ -98,7 +98,14 @@ namespace CarRepairScheduling.Controllers
             Wrapper.AllCars = _context.Cars
                 .Include(c => c.Owner)
                 .ToList();
-            Wrapper.AllServiceTypes = _context.ServiceTypes.Include(s => s.Services).Where(s => s.Active == true).OrderBy(s => s.Name).ToList();
+            if (Wrapper.User.Email.Contains("lubee.com"))
+            {
+                Wrapper.AllServiceTypes = _context.ServiceTypes.Include(s => s.Services).OrderBy(s => s.Name).ToList();
+            }
+            else
+            {
+                Wrapper.AllServiceTypes = _context.ServiceTypes.Include(s => s.Services).Where(s => s.Active == true).OrderBy(s => s.Name).ToList();
+            }
             return View("Services", Wrapper);
         }
         [HttpPost("service/delete/{id}")]
@@ -215,6 +222,22 @@ namespace CarRepairScheduling.Controllers
                     Year = a.Year
                 });
             return Json(TheseCars);
+        }
+
+        [HttpPost("/service/inactivate/{id}")]
+        public IActionResult InactivateService(int id)
+        {
+            User ActiveUser = _context.Users.FirstOrDefault(u => u.UserId == HttpContext.Session.GetInt32("CurrentUser"));
+            if (ActiveUser == null)
+            {
+                return RedirectToAction("Index", "LoginReg");
+            }
+            ServiceType ServiceTypeToInactivate = _context.ServiceTypes
+                .FirstOrDefault(st => st.ServiceTypeId == id);
+            ServiceTypeToInactivate.Active = !ServiceTypeToInactivate.Active;
+            _context.ServiceTypes.Update(ServiceTypeToInactivate);
+            _context.SaveChanges();
+            return RedirectToAction("Services");
         }
     }
 }

@@ -14397,6 +14397,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/Users/josephgarrett/Desktop/coding_dojo/C#/CarRepairScheduling/Views/Dashboard/CompletedServices.cshtml",
+      "TargetPath": "Views\\Dashboard\\CompletedServices.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/Users/josephgarrett/Desktop/coding_dojo/C#/CarRepairScheduling/Views/LoginReg/Index.cshtml",
       "TargetPath": "Views\\LoginReg\\Index.cshtml",
       "FileKind": "mvc"

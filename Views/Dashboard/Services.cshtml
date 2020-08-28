@@ -67,18 +67,18 @@
                         <td id="active">
                             @if(@service.Active)
                             {
-                                <form action='@($"/service/inactivate/{service.ServiceTypeId}")' method="POST"><button type="button" class="btn btn-secondary">Inactivate</button></form>
+                                <form action='@($"/service/inactivate/{service.ServiceTypeId}")' method="POST"><button type="submit" class="btn btn-secondary">Inactivate</button></form>
                             }
                             else
                             {
-                                <form action='@($"/service/inactivate/{service.ServiceTypeId}")' method="POST"><button type="button" class="btn btn-success">Activate</button></form>
+                                <form action='@($"/service/inactivate/{service.ServiceTypeId}")' method="POST"><button type="submit" class="btn btn-success">Activate</button></form>
                             }
                         </td>
                         @if (Model.User.Email.Contains("lubee.com"))
                         {
                             <td>
                                 <form action='@($"/service/delete/{service.ServiceTypeId}")' method="POST">
-                                    <button type="button" class="btn btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
                                 </form>
                             </td>
                         }
