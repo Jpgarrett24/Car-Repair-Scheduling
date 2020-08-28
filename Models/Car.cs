@@ -18,7 +18,7 @@ namespace CarRepairScheduling.Models
         public string Model { get; set; }
 
         [Required(ErrorMessage = "Milage is required")]
-        [Display(Name = "Milage: ")]
+        [Display(Name = "Mileage: ")]
         [Range(0, 2000000000, ErrorMessage = "Must be a positive number")]
         public int Mileage { get; set; }
 

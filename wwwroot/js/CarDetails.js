@@ -41,7 +41,7 @@ $.ajax({
                 <p><strong>${res.Results[24].Variable}:</strong> ${res.Results[24].Value}</p>
                 <p><strong>${res.Results[70].Variable}:</strong> ${res.Results[70].Value}</p>
                 <p><strong>${res.Results[71].Variable}:</strong> ${res.Results[71].Value}</p>
-                <p><strong>Horesepower:</strong> ${res.Results[82].Value}</p>
+                <p><strong>Horsepower:</strong> ${res.Results[82].Value}</p>
                 <p><strong>Mileage:</strong> @Model.Car.Mileage</p>
                 `)
         }
@@ -52,7 +52,7 @@ $.ajax({
                 <p><strong>Vehicle Weight:</strong> ${res.Results[28].Value}</p>
                 <p><strong>${res.Results[70].Variable}:</strong> ${res.Results[70].Value}</p>
                 <p><strong>${res.Results[71].Variable}:</strong> ${res.Results[71].Value}</p>
-                <p><strong>Horesepower:</strong> ${res.Results[82].Value}</p>
+                <p><strong>Horsepower:</strong> ${res.Results[82].Value}</p>
                 <p><strong>Mileage:</strong> @Model.Car.Mileage</p>
                 `)
         }
