@@ -250,7 +250,14 @@ namespace CarRepairScheduling.Controllers
                 return RedirectToAction("Index", "LoginReg");
             }
             Wrapper.User = ActiveUser;
-            Wrapper.AllServices = _context.Services.Include(s => s.ServiceType).Include(s => s.ServicedCar).ThenInclude(c => c.Owner).Where(s => s.Start < DateTime.Now).ToList();
+            if (Wrapper.User.Email.Contains("lubee.com"))
+            {
+                Wrapper.AllServices = _context.Services.Include(s => s.ServiceType).Include(s => s.ServicedCar).ThenInclude(c => c.Owner).Where(s => s.Start < DateTime.Now).ToList();
+            }
+            else
+            {
+                Wrapper.AllServices = _context.Services.Include(s => s.ServiceType).Include(s => s.ServicedCar).ThenInclude(c => c.Owner).Where(s => s.ServicedCar.Owner.UserId == Wrapper.User.UserId).ToList();
+            }
             return View("CompletedServices", Wrapper);
         }
     }
