@@ -907,11 +907,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/josephgarrett/Desktop/coding_dojo/C#/CarRepairScheduling2/CarRepairScheduling.csproj",
+      "projectUniqueName": "/Users/josephgarrett/Desktop/coding_dojo/C#/CarRepairScheduling/CarRepairScheduling.csproj",
       "projectName": "CarRepairScheduling",
-      "projectPath": "/Users/josephgarrett/Desktop/coding_dojo/C#/CarRepairScheduling2/CarRepairScheduling.csproj",
+      "projectPath": "/Users/josephgarrett/Desktop/coding_dojo/C#/CarRepairScheduling/CarRepairScheduling.csproj",
       "packagesPath": "/Users/josephgarrett/.nuget/packages/",
-      "outputPath": "/Users/josephgarrett/Desktop/coding_dojo/C#/CarRepairScheduling2/obj/",
+      "outputPath": "/Users/josephgarrett/Desktop/coding_dojo/C#/CarRepairScheduling/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/josephgarrett/.nuget/NuGet/NuGet.Config"
