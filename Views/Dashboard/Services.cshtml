@@ -11,6 +11,8 @@
             padding: 1% 5%;
         }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="~/js/Schedule.js"></script>
 </head>
 <body>
     <header>
@@ -66,13 +68,13 @@
                         {
                             <td>
                                 <form action='@($"/service/delete/{service.ServiceTypeId}")' method="POST">
-                                    <button>Delete</button>
+                                    <button class="btn">Delete</button>
                                 </form>
                             </td>
                         }
                         else
                         {
-                            <td><a href="/service/new/@service.ServiceTypeId">Schedule</a></td>
+                            <td><button value="@service.ServiceTypeId" class="btn btn-primary schedule">Schedule</button></td>
                         }
                     </tr>
                 }
